@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "plyconfig.json": "jsonc"
+        "plyconfig.json": "jsonc",
+        "stdio.h": "c",
+        "string.h": "c"
     }
 }
