@@ -6,6 +6,7 @@
 #include<netdb.h>
 
 int send_size, recv_size ;
+#define serverIP "127.0.0.1"
 int main(int argc , char *argv[])
 {
     int socket_desc , client_sock , recv_size;
@@ -18,7 +19,7 @@ int main(int argc , char *argv[])
     
     server.sin_family = AF_INET;
     server.sin_port = htons(8007);
-    inet_pton (AF_INET, "127.0.0.1", &(server.sin_addr)) ; //fill in server ip address // loopback: 127.0.0.1
+    inet_pton (AF_INET, serverIP, &(server.sin_addr)) ; //fill in server ip address // loopback: 127.0.0.1
     if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
     {
         perror("bind failed. Error");

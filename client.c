@@ -7,6 +7,7 @@
 #include<netdb.h>
 
 struct sockaddr_in sa ;
+#define ClientIP "127.0.0.1"
 int main()
         { int err;
           char my_buf[1024] ;
@@ -17,7 +18,7 @@ int main()
          int my_sock = socket(AF_INET, SOCK_STREAM, 0) ;
          sa.sin_family   = AF_INET ;
          sa.sin_port     = htons(8007) ;
-         inet_pton(AF_INET, "127.0.0.1" , &(sa.sin_addr)) ; //fill in IP address of server //
+         inet_pton(AF_INET, ClientIP, &(sa.sin_addr)) ; //fill in IP address of server //
          printf("BEFORE CONNECT\n") ;
          int x = connect(my_sock, (struct sockaddr *) &sa, sizeof(sa)) ;
          if(x < 0)
