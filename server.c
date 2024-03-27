@@ -32,8 +32,7 @@ int main(int argc , char *argv[])
     fseek(ptr, 0, SEEK_SET);//back to start of file 
 
     long fsize = htonl(fileSize) ;
-    send_size = send(client_sock, &fsize, sizeof(fsize),0);
-    
+
 
  listen(socket_desc , 1); 
  client_sock = accept(socket_desc, (struct sockaddr *)&client, &c);    
@@ -42,14 +41,33 @@ int main(int argc , char *argv[])
         perror("accept failed");
         return 1;
     }
-
-    recv_size = recv(client_sock, client_message , 32 , 0) ;
-
-    printf("Got this from Client %s\n", client_message) ;
    
-    sprintf(client_message,"YOA DOG!\n") ; 
-   
-    send_size = send(client_sock , client_message , 32, 0);
+    long numChucks = fsize/ 1024; 
+    long lastChunck = fsize % 1024;
+
+    send_size = send(client_sock, &fsize, sizeof(fsize), 0);
+    send_size = send( client_sock, &numChucks, sizeof(numChucks), 0);
+    send_size = send( client_sock, &lastChunck, sizeof(numChucks), 0);
+
+
+
+/*
+char buf[1024];
+    fseek(ptr, 0, SEEK_SET);
+    for (int i = 0; i < numChucks; i ++)
+        {
+            fread( buf, 1024, i, ptr ); 
+            send_size = send(client_sock, &fsize, 1024, 0);
+            
+        }
     
+
+
     return 0;
-}
+*/
+    fclose(ptr);
+    close(client_sock);
+    close(socket_desc);
+
+    return 0;
+}    
