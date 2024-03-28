@@ -44,9 +44,14 @@ int main()
       for(int i = 0; i < numChuncks ; i++)
       {
         recv(my_sock, buf, sizeof(buf), 0);
-        fwrite(buf, 1024, 1, ptr) ;//how does this work todo
+        fwrite(buf, 1024, 1, ptr) ;//how does this work todo, frite moves the ptr as part of its functionality
       }
-             
+    
+      if (lastChunck > 0) 
+      {
+        recv(my_sock, buf, sizeof(buf), 0);
+        fwrite(buf, 1024, 1, ptr) ;
+      }
      
 
       fclose(ptr);
