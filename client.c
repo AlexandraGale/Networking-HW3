@@ -50,7 +50,7 @@ int main()
       if (lastChunck > 0) 
       {
         recv(my_sock, buf, sizeof(buf), 0);
-        fwrite(buf, 1024, 1, ptr) ;
+        fwrite(buf, lastChunck, 1, ptr) ;
       }
      
 
